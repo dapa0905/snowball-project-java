@@ -62,6 +62,11 @@ public class PolygonService implements PolygonServiceImpl {
         candle.setLow(node.path("l").asDouble());
         candle.setClose(node.path("c").asDouble());
         candle.setVolume(node.path("v").asLong());
+        
+        // 밀리 초 단위 -> 시간 변환
+        LocalDate date = Instant.ofEpochMilli(node.path("t").asLong()).atZone(ZoneId.of("America/New_York")).toLocalDate();
+        candle.setDate(date.toString());
+        
         candles.add(candle);
       }
       return candles;

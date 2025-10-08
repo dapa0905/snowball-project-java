@@ -1,0 +1,41 @@
+/* MarketSummary.css */
+.market-card {
+  min-width: 180px;
+  padding: 12px;
+  margin-right: 16px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.market-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.market-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.market-change {
+  font-size: 14px;
+}
+
+.market-change.up {
+  color: #dc3545; /* 빨강: 상승 */
+}
+
+.market-change.down {
+  color: #007bff; /* 파랑: 하락 */
+}
