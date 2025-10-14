@@ -32,13 +32,13 @@ const MarketSummary = ({ ticker, startDate, endDate }) => {
         }
 
         if (data.length < 2) {
-          console.warn("데이터 한 개만 있음, 변화량 계산 불가");
+          console.warn("only one data, no change");
           const only = data[0];
           setMarketData([
             {
               label: `${ticker} (${only.date})`,
               value: only.close.toFixed(2),
-              change: "변화 없음",
+              change: "no change",
               isPositive: true,
             },
           ]);
@@ -59,8 +59,8 @@ const MarketSummary = ({ ticker, startDate, endDate }) => {
           },
         ]);
       } catch (error) {
-        console.error("데이터 요청 실패", error);
-        setError("데이터 요청 실패");
+        console.error("data request failed", error);
+        setError("data request failed");
       } finally {
         setLoading(false);
       }
@@ -69,10 +69,10 @@ const MarketSummary = ({ ticker, startDate, endDate }) => {
     fetchCandleDate();
   }, [ticker, startDate, endDate]);
 
-  if (loading) return <div className="market-card">로딩 중...</div>;
+  if (loading) return <div className="market-card">loading...</div>;
   if (error) return <div className="market-card text-danger">{error}</div>;
   if (marketData.length === 0)
-    return <div className="market-card">데이터 없음</div>;
+    return <div className="market-card">no data</div>;
 
   return (
     <div className="market-card">

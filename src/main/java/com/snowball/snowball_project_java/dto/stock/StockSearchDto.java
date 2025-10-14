@@ -10,8 +10,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StockSearchDto {
-  
+
   private String ticker;
   private String name;
-
+  private String description;
+  private String homepageUrl;
+  private Long marketCap;
+  private String logoUrl;
+  private String sicCode;
+  private String sicDescription;
+  private String type;
 }
