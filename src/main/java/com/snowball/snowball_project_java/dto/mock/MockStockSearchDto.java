@@ -1,4 +1,4 @@
-package com.snowball.snowball_project_java.dto.stock;
+package com.snowball.snowball_project_java.dto.mock;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StockSearchDto {
+public class MockStockSearchDto {
 
   private String ticker;
   private String name;

@@ -23,3 +23,17 @@ export interface MarketData {
   change: string;
   isPositive: boolean;
 }
+
+export interface MockTickerData {
+  name: string;
+  symbol: string;
+  sector: string;
+  currentPrice: string;
+  rateOfChange: string;
+  tradingValue: string;
+  volumeRatio: number;
+}
+
+export interface MockApiResponse {
+  data: MockTickerData[];
+}

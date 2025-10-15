@@ -2,9 +2,12 @@ package com.snowball.snowball_project_java.service.mock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import org.springframework.stereotype.Service;
+import com.snowball.snowball_project_java.dto.mock.MockTicker;
 import com.snowball.snowball_project_java.dto.stock.StockCandleDto;
 import com.snowball.snowball_project_java.dto.stock.StockMainIndexDto;
 import com.snowball.snowball_project_java.dto.stock.StockSearchDto;
@@ -28,6 +31,52 @@ public class MockDataService {
             { "UUP", "Invesco DB US Dollar Index Bullish Fund", "ETF", "28.00" },
             { "DIA", "SPDR Dow Jones Industrial Average ETF", "ETF", "340.00" }
     };
+    
+    private final List<MockTicker> TICKERS = List.of(
+        // Tech
+        new MockTicker("AAPL", "Apple Inc.", "Technology", 150.00),
+        new MockTicker("MSFT", "Microsoft Corporation", "Technology", 300.00),
+        new MockTicker("NVDA", "NVIDIA Corporation", "Technology", 400.00),
+        new MockTicker("GOOGL", "Alphabet Inc.", "Technology", 120.00),
+        new MockTicker("AMZN", "Amazon.com Inc.", "E-commerce", 130.00),
+        new MockTicker("META", "Meta Platforms Inc.", "Technology", 250.00),
+        new MockTicker("ORCL", "Oracle Corporation", "Technology", 110.00),
+        new MockTicker("ADBE", "Adobe Inc.", "Technology", 520.00),
+        
+        // Automotive
+        new MockTicker("TSLA", "Tesla Inc.", "Automotive", 200.00),
+        new MockTicker("F", "Ford Motor Company", "Automotive", 13.00),
+        new MockTicker("GM", "General Motors Company", "Automotive", 32.00),
+        new MockTicker("RIVN", "Rivian Automotive Inc.", "Automotive", 17.00),
+        
+        // Financial
+        new MockTicker("JPM", "JPMorgan Chase & Co.", "Financial", 145.00),
+        new MockTicker("BAC", "Bank of America Corporation", "Financial", 29.00),
+        new MockTicker("GS", "Goldman Sachs Group Inc.", "Financial", 345.00),
+        new MockTicker("V", "Visa Inc.", "Financial", 230.00),
+        new MockTicker("MA", "Mastercard Incorporated", "Financial", 390.00),
+        
+        // Industrials
+        new MockTicker("GE", "General Electric Company", "Industrial", 155.00),
+        new MockTicker("CAT", "Caterpillar Inc.", "Industrial", 265.00),
+        new MockTicker("XOM", "Exxon Mobil Corporation", "Energy", 105.00),
+        new MockTicker("CVX", "Chevron Corporation", "Energy", 150.00),
+        new MockTicker("BP", "BP p.l.c.", "Energy", 38.00),
+        
+        // Healthcare
+        new MockTicker("JNJ", "Johnson & Johnson", "Healthcare", 160.00),
+        new MockTicker("PFE", "Pfizer Inc.", "Healthcare", 32.00),
+        new MockTicker("MRNA", "Moderna Inc.", "Healthcare", 95.00),
+        new MockTicker("UNH", "UnitedHealth Group Incorporated", "Healthcare", 520.00),
+         
+        // Consumer
+        new MockTicker("WMT", "Walmart Inc.", "Consumer", 165.00),
+        new MockTicker("PG", "Procter & Gamble Company", "Consumer", 150.00),
+        new MockTicker("KO", "Coca-Cola Company", "Consumer", 58.00),
+        new MockTicker("NKE", "Nike Inc.", "Consumer", 95.00),
+        new MockTicker("DIS", "Walt Disney Company", "Entertainment", 89.00)
+
+    );
 
     public List<StockCandleDto> generateMockCandleData(String ticker, LocalDate startDate, LocalDate endDate) {
         log.info("Generating mock candle data for ticker: {}, from {} to {}", ticker, startDate, endDate);
@@ -148,5 +197,27 @@ public class MockDataService {
     private double roundToTwoDecimals(double value) {
         return Math.round(value * 100.0) / 100.0;
     }
+    
+    // Loading MockData
+    public List<Map<String, Object>> getGenerateMockStockList() {
+      List<Map<String, Object>> result = new ArrayList<>();
+
+      for (MockTicker ticker : TICKERS) {
+          double currentPrice = ticker.generateCurrentPrice(random);
+
+          Map<String, Object> stock = new LinkedHashMap<>();
+          stock.put("name", ticker.getName());
+          stock.put("symbol", ticker.getSymbol());
+          stock.put("sector", ticker.getSector());
+          stock.put("currentPrice", String.format("%.2f", currentPrice));
+          stock.put("rateOfChange", ticker.generateRateOfChange(currentPrice));
+          stock.put("tradingValue", ticker.generateTradingValue(random));
+          stock.put("volumeRatio", ticker.generateVolumeRatio(random));
+
+          result.add(stock);
+      }
+
+      return result;
+  }
 
 }
