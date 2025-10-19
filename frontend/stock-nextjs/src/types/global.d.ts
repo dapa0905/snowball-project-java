@@ -34,6 +34,18 @@ export interface MockTickerData {
   volumeRatio: number;
 }
 
+export interface MockTickerTrendsData {
+  type: string;
+  netBuy: string;
+  trend: string;
+  percentage: number;
+  volume: string;
+}
+
 export interface MockApiResponse {
   data: MockTickerData[];
+}
+
+export interface MockTickerDataWithTrends extends MockTickerData {
+  trend: MockTickerTrendsData[];
 }

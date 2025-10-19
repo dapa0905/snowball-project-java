@@ -5,7 +5,7 @@ import { Box, Tabs, Tab, Paper } from "@mui/material";
 import { Timeline, TrendingUp, People } from "@mui/icons-material";
 import RealTimeChartTab from "@/components/Tabs/ReaTimeChartTab/RealTimeChartTab";
 import TrendingCategoriesTab from "@/components/Tabs/TrendingCategoriesTab";
-import DomesticInvestorTrendsTab from "@/components/Tabs/DomesticInvestorTrendsTab";
+import DomesticInvestorTrendsTab from "@/components/Tabs/Domestic/DomesticInvestorTrendsTab";
 
 interface TabPanelProps {
   children?: React.ReactNode;

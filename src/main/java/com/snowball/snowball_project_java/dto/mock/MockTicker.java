@@ -1,5 +1,6 @@
 package com.snowball.snowball_project_java.dto.mock;
 
+import java.util.List;
 import java.util.Random;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,6 @@ public class MockTicker {
   private String sector;
   private double basePrice;
 
-
   // 실시간(혹은 mock) 변동 가격을 시뮬레이션
   public double generateCurrentPrice(Random random) {
     double volatility = 0.05;
@@ -33,17 +33,24 @@ public class MockTicker {
 
   // 거래대금 (mock)
   public String generateTradingValue(Random random) {
-    int million = 10000 + random.nextInt(100000); 
+    int million = 10000 + random.nextInt(100000);
     return String.format("%,d만원", million / 100);
   }
 
   // 거래량비율 (mock)
   public int generateVolumeRatio(Random random) {
-    return 40 + random.nextInt(60); 
+    return 40 + random.nextInt(60);
   }
 
   private double roundToTwoDecimals(double value) {
     return Math.round(value * 100.0) / 100.0;
+  }
+
+  // trendMockData Setting
+  public List<MockTickerTrend> generateTrends(Random random) {
+    return List.of(MockTickerTrend.randomTrend("Individual Investors", random),
+        MockTickerTrend.randomTrend("Institutional Investors", random),
+        MockTickerTrend.randomTrend("Foreign Investors", random));
   }
 
 }
